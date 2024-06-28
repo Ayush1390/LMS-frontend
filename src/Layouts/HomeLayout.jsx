@@ -1,11 +1,21 @@
 import {FiMenu} from 'react-icons/fi';
 import {AiFillCloseCircle} from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
+import {useDispatch,useSelector} from 'react-redux'
 
 
 
 function HomeLayout({children}){
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // for checking if user is logged in
+    const isLoggedIn = useSelector((state)=> state?.auth?.isLoggedIn);
+
+    // for displaying the options acc to role
+    const role = useSelector((state)=> state?.auth?.role);
 
 
     function changeWidth(){
@@ -19,6 +29,14 @@ function HomeLayout({children}){
 
         const drawerSide = document.getElementsByClassName('drawer-side');
         drawerSide[0].style.width = '0';
+    }
+
+    function handleLogout(e){
+        e.preventDefault();
+        // const res = await dispatch(logout());
+
+        // if(res?.payload?.sucess)
+        navigate('/');
     }
 
     return(
@@ -57,6 +75,14 @@ function HomeLayout({children}){
                             </Link>
                         </li>
 
+                        {isLoggedIn && role==='ADMIN' && (
+                            <li>
+                                <Link to='/admin/dashboard'>
+                                    Admin Dashboard
+                                </Link>
+                            </li>
+                        )}
+
                         <li>
                             <Link to='/courses'>All Courses</Link>
                         </li>
@@ -65,9 +91,43 @@ function HomeLayout({children}){
                             <Link to='/contact'>Contact us</Link>
                         </li>
 
-                        <li>
+                        <li >
                             <Link to='/about'>About us</Link>
                         </li>
+
+                        {!isLoggedIn && (
+                            <li>
+                                <div className='w-full flex items-center justify-center gap-1'>
+                                    <button className=' bg-[#3B71CA] px-4 py-2   font-semibold rounded-md w-1/2 hover:bg-[#5A90E5] transition-all ease-in-out duration-300'>
+                                        <Link to='/login' className='text-black'>
+                                            Login
+                                        </Link>
+                                    </button>
+                                    <button className=' bg-[#9FA6B2] px-4 py-2 font-semibold rounded-md w-1/2 hover:bg-[#cacfd7] transition-all ease-in-out duration-300'>
+                                        <Link to='/signup' className='text-black'>
+                                            Signup
+                                        </Link>
+                                    </button>
+                                </div>
+                            </li>    
+                        )}
+
+                        {isLoggedIn && (
+                            <li>
+                                <div className='w-full flex items-center justify-center gap-1'>
+                                    <button className=' bg-[#3B71CA] px-4 py-2   font-semibold rounded-md w-1/2 hover:bg-[#5A90E5] transition-all ease-in-out duration-300'>
+                                        <Link to='/user/profile' className='text-black'>
+                                            Profile
+                                        </Link>
+                                    </button>
+                                    <button className=' bg-[#9FA6B2] px-4 py-2 font-semibold rounded-md w-1/2 hover:bg-[#cacfd7] transition-all ease-in-out duration-300'>
+                                        <Link onClick={handleLogout} className='text-black'>
+                                            Logout
+                                        </Link>
+                                    </button>
+                                </div>
+                            </li>    
+                        )}
 
                     </ul>
 
