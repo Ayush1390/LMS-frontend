@@ -18,12 +18,13 @@ function HomePage(){
                     </p>
                     <div className="space-x-6">
                         <Link to="/courses">
-                            <button className="bg-yellow-500 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300 text-black">
+                            <button className="bg-yellow-500 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300
+                            text-black">
                                 Explore Courses
                             </button>
                         </Link>
                         <Link to="/contact">
-                            <button className="border border-white px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300 text-white">
+                            <button className="border border-white px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-30 text-white">
                                 Contact Us
                             </button>
                         </Link>
