@@ -12,7 +12,7 @@ function CarouselSlide({image,title,description,slideNumber,totalSlides}){
                 <h2 className="font-semibold text-2xl ">
                     {title}
                 </h2>
-                <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <div className="absolute left-5 right-5 top-1/2 flex transform -translate-y-1/2  justify-between">
                     <a href={`#slide${slideNumber==1 ? 5:slideNumber-1}`} className="btn btn-circle">❮</a>
                     <a href={`#slide${slideNumber==5 ? 1:slideNumber+1}`} className="btn btn-circle">❯</a>
                 </div>
