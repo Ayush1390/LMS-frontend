@@ -24,11 +24,11 @@ function CourseList(){
             <div className="min-h-[90vh] pt-20 pl-20 flex flex-col flex-wrap gap-10 text-white ">
                 <h1 className="text-center text-3xl font-semibold mb-5">
                     Explore the courses made by 
-                    <span className="font-bold text-yellow-500"> Industry experts</span>
+                    <span className="font-bold text-yellow-500"> Industry Experts</span>
                 </h1>
-                <div className="flex mb-10 flex-wrap gap-14">
+                <div className="flex mb-10 flex-wrap gap-14 ">
                     {courseData?.map((element)=> {
-                        return <CourseCard key={element.id} data={element}/>
+                        return <CourseCard key={element._id} data={element}/>
                     } )}
                 </div>
             </div>
