@@ -19,7 +19,7 @@ function Signup(){
         fullName:'',
         email:'',
         password:'',
-        avatar:''
+        avatar:null
 
     })
 
@@ -36,18 +36,21 @@ function Signup(){
         const uploadedImage = e.target.files[0];
         
         if(uploadedImage){
-            setSignupData({
-                ...signupData,
-                avatar:uploadedImage
+
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(uploadedImage);
+            fileReader.addEventListener('load',function(){
+
+                setSignupData({
+                    ...signupData,
+                    avatar:uploadedImage
+                })
+
+                setPreviewImage(this.result);
             })
+
         }
 
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(uploadedImage);
-        fileReader.addEventListener('load',function(){
-            console.log(this.result);
-            setPreviewImage(this.result);
-        })
     }
 
     async function createNewAccount(e){
@@ -81,17 +84,17 @@ function Signup(){
         const response = await dispatch(createAccount(formData));
         console.log(response);
         if(response?.payload?.sucess){
+            setSignupData({
+                fullName:'',
+                email:'',
+                password:'',
+                avatar:null
+            });
+    
+            setPreviewImage('');
             navigate('/');
         }
 
-        setSignupData({
-            fullName:'',
-            email:'',
-            password:'',
-            avatar:''
-        });
-
-        setPreviewImage('');
     }
 
     return(
