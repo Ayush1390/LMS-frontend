@@ -6,7 +6,7 @@ import axiosInstance from '../../Helpers/axiosInstance'
 const initialState = {
     isLoggedIn: localStorage.getItem('isLoggedIn') || false,
     role:localStorage.getItem('role') || '',
-    data:localStorage.getItem('data') || {}
+    data:localStorage.getItem('data') != undefined ? JSON.parse(localStorage.getItem('data')) : {}
 }
 
 export const createAccount = createAsyncThunk('/auth/signup', async(data)=>{
@@ -60,6 +60,31 @@ export const logout = createAsyncThunk('/auth/logout', async()=>{
     }
 })
 
+export const editProfile = createAsyncThunk('/user/editprofile',async(data)=>{
+    try {
+        // console.log('thunk id',id);
+        const res = axiosInstance.put(`/user/update/${data[0]}`,data[1]);
+        console.log('res',res);
+        toast.promise(res,{
+            loading:'Wait ! Updating your profile',
+            success:'Profile updated sucessfully',
+            error:'Failed to update profile'
+        })
+        return (await res).data
+    } catch (error) {
+        toast.error(error.message)
+    }
+})
+
+export const getUserData = createAsyncThunk('/user/details',async()=>{
+    try {
+        const res = axiosInstance.get(`/user/profile`);
+        return (await res).data
+    } catch (error) {
+        toast.error(error.message)
+    }
+})
+
 const authSlice = createSlice({
     name:'auth',
     initialState,
@@ -85,6 +110,15 @@ const authSlice = createSlice({
             localStorage.clear();
             state.isLoggedIn=false;
             state.data = {};
+        })
+        .addCase(getUserData.fulfilled,(state,action)=>{
+            if(action?.payload?.user)
+            localStorage.setItem('data',JSON.stringify(action?.payload?.user));
+            localStorage.setItem('isLoggedIn',true);
+            localStorage.setItem('role',action?.payload?.user?.role)
+            state.isLoggedIn=true;
+            state.data = action?.payload?.user;
+            state.role = action?.payload?.user?.role;
         })
     }
 });

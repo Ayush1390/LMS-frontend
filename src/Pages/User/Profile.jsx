@@ -2,16 +2,19 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import HomeLayout from "../../Layouts/HomeLayout";
 
+
 function Profile(){
 
 
     const userData = useSelector((state)=> state?.auth?.data)
-
+    console.log(userData);
+    
     return(
         <HomeLayout>
             <div className="flex min-h-[100vh] justify-center items-center">
                 <div className="flex flex-col w-96 my-10 gap-4 p-4 rounded-lg text-white shadow-[0_0_10px_black]">
-                    <img src={userData.avatar.secure_url} alt="" className="w-40 m-auto rounded-full border border-black" />
+                    
+                    <img src={userData.avatar.secure_url } alt="" className="w-40  m-auto rounded-full border border-black" />
                     <h3 className="text-xl font-semibold text-center capitalize">
                         {userData?.fullName}
                     </h3>
