@@ -14,6 +14,7 @@ import CreateCourse from './Pages/Course/CreateCourse'
 import Profile from './Pages/User/Profile'
 import EditProfile from './Pages/User/EditProfile'
 import DisplayLectures from './Pages/Dashboard/DisplayLectures'
+import AddLecture from './Pages/Dashboard/AddLecture'
 // import Checkout from './Pages/Payment/Checkout'
 
 
@@ -32,9 +33,14 @@ function App() {
         <Route path='/denied' element={<Denied/>}></Route>
         <Route path='/course/description/' element={<CourseDescription/>}></Route>
         <Route path='/course/displaylectures' element={<DisplayLectures/>}></Route>
+        <Route path='/course/addlecture' element={<AddLecture/>}></Route>
         
         <Route element={<RequireAuth allowedRoles={['ADMIN']}/>} >
           <Route path='/course/create' element={<CreateCourse/>}></Route>
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={['ADMIN']}/>} >
+          <Route element={<RequireAuth allowedRoles={['ADMIN']}/>} ></Route>
         </Route>
 
         <Route element={<RequireAuth allowedRoles={['ADMIN','USER']}/>} >

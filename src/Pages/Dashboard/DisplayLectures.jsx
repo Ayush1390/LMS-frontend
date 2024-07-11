@@ -39,7 +39,8 @@ function DisplayLectures(){
                 <div className="text-center text-2xl font-semibold text-yellow-500">
                     Course name : {state?.title} 
                 </div>
-                {lectures && lectures.length>0 && (<div className="flex justify-center gap-10 w-full">
+
+                {(lectures && lectures.length>0)? (<div className="flex justify-center gap-10 w-full">
                     {/* left section videos and displaying details to admin*/}
                     <div className="space-y-5 w-[40rem] p-2 rounded-lg shadow-[0_0_10px_black]">
                         <video 
@@ -65,7 +66,7 @@ function DisplayLectures(){
                         </div>
                     </div>
                     {/* right section */}
-                    <ul className="w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-4">
+                    <ul className="w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-4 overflow-y-scroll max-h-[80vh]">
                         <li className="font-semibold text-xl text-yellow-500 flex items-center justify-between mb-10">
                             <p>
                                 Lectures list
@@ -96,7 +97,13 @@ function DisplayLectures(){
                             )
                         })}
                     </ul>
-                </div>)}
+                </div>):(
+                    role==='ADMIN' && (
+                        <button onClick={()=> navigate('/course/addlecture',{state:{...state}})} className="bg-blue-500 px-2 py-1 rounded-md text-sm font-semibold text-white  hover:bg-blue-600 hover:shadow-[0_0_10px_blue]">
+                            Add new lectures
+                        </button>
+                    )
+                )}
             </div>
         </HomeLayout>
     )
