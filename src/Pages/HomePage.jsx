@@ -31,7 +31,7 @@ function HomePage(){
                     </div>
                 </div>
                 <div className="w-1/2 flex items-center justify-center">
-                    <img src={HomePageImage} alt="homepage image"/>
+                    <img src={HomePageImage} alt="homepage image" className="transform hover:transition-all ease-in-out duration-300 hover:scale-110"/>
                 </div>
             </div>
         </HomeLayout>

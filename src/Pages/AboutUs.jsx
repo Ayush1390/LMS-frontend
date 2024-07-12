@@ -23,7 +23,7 @@ function AboutUs(){
                     </section>
                     <div className="w-1/2">
                         <img src={aboutMainImage} 
-                        className="drop-shadow-2xl" 
+                        className="drop-shadow-2xl transform hover:transition-all ease-in-out duration-300 hover:scale-110" 
                         id="test1" 
                         style={{
                             filter: "drop-shadow(0px 10px 10px rgb(0,0,0))"    
@@ -32,9 +32,9 @@ function AboutUs(){
                         />
                     </div>
                 </div>
-                <div className="carousel w-1/2 my-16 m-auto ">
+                <div className="carousel w-1/2 my-16 m-auto">
                     {slideData.map((person,idx)=>
-                    <CarouselSlide image={person.image} title={person.title} description={person.description} slideNumber={idx+1} totalSlides={slideData.length} key={idx+1}/>
+                    <CarouselSlide image={person.image} title={person.title} description={person.description} slideNumber={idx+1} totalSlides={slideData.length} key={idx+1 }/>
                     )}
                 </div>
             </div>
