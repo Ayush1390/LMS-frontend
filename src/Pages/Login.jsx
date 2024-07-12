@@ -79,6 +79,10 @@ function Login(){
                         className="bg-transparent px-2 py-1 border "/>
                     </div>
 
+                    <div className="w-full flex justify-end">
+                        <Link to="/forgotpassword" className="link text-accent">Forgot password?</Link>
+                    </div>
+
                     <button className="w-full rounded-md border border-white py-1 bg-blue-500 mt-6 font-semibold hover:shadow-[0_0_10px_blue] hover:bg-blue-700 transition-all ease-in-out duration-300" type="submit">
                         Login
                     </button>

@@ -85,6 +85,56 @@ export const getUserData = createAsyncThunk('/user/details',async()=>{
     }
 })
 
+export const changePassword = createAsyncThunk('/user/changepassword',async(data)=>{
+    try {
+        // console.log('thunk id',id);
+        const res = axiosInstance.post('/user/change-password',data);
+        console.log('res',res);
+        toast.promise(res,{
+            loading:'Wait ! changing your password',
+            success:'Password changed sucessfully',
+            error:'Failed to change password'
+        })
+        return (await res).data
+    } catch (error) {
+        toast.error(error.message)
+    }
+})
+
+export const forgotPassword = createAsyncThunk('/user/forgotpassword',async(data)=>{
+    try {
+        const res = axiosInstance.post('/user/reset',data);
+        toast.promise(res,{
+            loading:'Genrating token',
+            success:(data)=>{
+                return data?.data?.message
+            },
+            error:'Something went wrong !! Try again'
+        })
+        return (await res).data
+    } catch (error) {
+        toast.error(error.message)   
+    }
+
+})
+
+export const resetPassword = createAsyncThunk('/user/resetpassword',async(data)=>{
+    try {
+        const res = axiosInstance.post(`/user/reset/${data.resetToken}`,{password:data.password});
+        console.log(data.resetToken);
+        toast.promise(res,{
+            loading:'Resetting password',
+            success:'password reset successfull',
+            error:(error)=>{
+                return error?.response?.data?.message
+            }
+        })
+    return (await res).data
+    } catch (error) {
+        toast.error(error.message)
+    }
+})
+
 const authSlice = createSlice({
     name:'auth',
     initialState,

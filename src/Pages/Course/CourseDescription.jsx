@@ -38,7 +38,7 @@ function CourseDescription(){
                                 role==='ADMIN' || data?.subscription?.status==='Inactive'? (
                                     <button onClick={()=>navigate('/course/displaylectures',{state:{...state}})} className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300">
                                         Watch lectures
-                                    </button>
+                                    </button>                                   
                                 ):(
                                     <button onClick={()=>navigate('/checkout')} className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300">
                                         Subscribe
